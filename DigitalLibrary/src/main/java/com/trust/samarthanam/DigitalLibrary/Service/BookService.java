@@ -24,12 +24,6 @@ public class BookService {
         for (Books book : test){
             System.out.println(book.getFormat());
             Map<String, Object> list = book.getFormat();
-            if(list.get("audio") != null){
-                System.out.println("Book is audio");
-            }
-            else if(list.get("pdf") != null){
-                System.out.println("Book is pdf");
-            }
         }
          return (List<Books>) booksRepo.findAll();
 
