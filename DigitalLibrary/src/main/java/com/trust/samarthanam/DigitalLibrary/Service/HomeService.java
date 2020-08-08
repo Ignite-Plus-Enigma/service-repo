@@ -43,20 +43,20 @@ public class HomeService {
     }
 //----------------------------------------recently added books----------------------------------------------------------
 
-    public Optional<List<Books>> findRecentlyAddedBooks(){
+    public List<Books> findRecentlyAddedBooks(){
         Query query = new Query();
         query.limit(7);
         query.with(Sort.by(Sort.Direction.DESC,"_id"));
-        return Optional.of(mongoTemplate.find(query, Books.class));
+        return mongoTemplate.find(query, Books.class);
     }
 
 //-----------------------------------most-viewed books------------------------------------------------------------------
 
-    public Optional<List<Books>> getMostViewedBooks(){
+    public List<Books> getMostViewedBooks(){
         Query query = new Query();
         query.limit(7);
         query.with(Sort.by(Sort.Direction.DESC,"views"));
-        return Optional.of(mongoTemplate.find(query, Books.class));
+        return mongoTemplate.find(query, Books.class);
     }
 
 }

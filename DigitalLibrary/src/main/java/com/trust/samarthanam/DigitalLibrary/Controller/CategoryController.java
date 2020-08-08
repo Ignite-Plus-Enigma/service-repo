@@ -17,7 +17,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/categories")
-    public Optional<List<Category>> getAll(){
+    public List<Category> getAll(){
         return categoryService.sortingCategories();
     }
 

@@ -53,10 +53,10 @@ public class CategoryService {
         return subcategories;
     }
 
-    public Optional<List<Category>> sortingCategories(){
+    public List<Category>sortingCategories(){
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC,"category"));
-        return Optional.of(mongoTemplate.find(query, Category.class));
+        return mongoTemplate.find(query, Category.class);
     }
 
     public List<Books> listFormatBooks(String format,String subName) {
