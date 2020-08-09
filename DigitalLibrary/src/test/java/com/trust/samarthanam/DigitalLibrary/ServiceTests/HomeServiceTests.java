@@ -93,7 +93,7 @@ public class HomeServiceTests{
                 "\t\"language\":\"Kannada\",\n" +
                 "\t\"bookImage\":\"https://drive.google.com/uc?export=download&id=1Sqc63-nx8nPnBGkOgpqs1uFLr1JcW60R\",\n" +
                 "\t\"description\":\"Alice's Adventures in Wonderland, widely beloved British children's book by Lewis Carroll.The story centres on Alice\",\n" +
-                "\t\"views\": 4,\n" +
+                "\t\"views\": 10,\n" +
                 "\t\"category\":\"Children\",\n" +
                 "\t\"subCategory\":[\"Story books\"],\n" +
                 "\t\"rating\": 4\n" +
@@ -132,12 +132,12 @@ public class HomeServiceTests{
     @Test
     public void findRecentlyAddedBooksTest(){
         List<Books> b = homeService.findRecentlyAddedBooks();
-        Assert.assertEquals(2,b.size());
+        Assert.assertEquals("2",b.get(0).getId());
     }
     @Test
     public void getMostViewedBooksTest(){
         List<Books> b = homeService.getMostViewedBooks();
-        Assert.assertEquals(4,b.get(0).getViews());
+        Assert.assertEquals(10,b.get(0).getViews());
 
     }
 
