@@ -11,42 +11,42 @@ import java.util.List;
 public class User {
     @Id
     @Field("_id")
-    private String emailId;
-    @Field("name")
-    private String Name;
+    private String id;
+    @Field("google_id")
+    private String googleId;
     @Field("saved_books")
-    private List<String> savedBooks;
+    private List<Object> savedBooks;
 
 
-    public String getEmailId() {
-        return emailId;
+    public String getId() {
+        return id;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getGoogleId() {
+        return googleId;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
-    public List<String> getSavedBooks() {
+    public List<Object> getSavedBooks() {
         return savedBooks;
     }
 
-    public void setSavedBooks(List<String> savedBooks) {
+    public void setSavedBooks(List<Object> savedBooks) {
         this.savedBooks = savedBooks;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "emailId='" + emailId + '\'' +
-                ", Name='" + Name + '\'' +
+        return "User{" +
+                "id='" + id + '\'' +
+                ", googleId='" + googleId + '\'' +
                 ", savedBooks=" + savedBooks +
                 '}';
     }
