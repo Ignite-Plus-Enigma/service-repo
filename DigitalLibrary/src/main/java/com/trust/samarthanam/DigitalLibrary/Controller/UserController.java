@@ -52,5 +52,17 @@ public class UserController {
         return userService.getsavedbooks(id);
     }
 
+    //----------------------------------------------mark a book finished -----------------------------------------------
+    @PutMapping("/user/{id}/savedbook/{bookId}/markfinished")
+    public User markfinished(@PathVariable String id,@PathVariable String bookId){
+            return userService.markfinished(id,bookId);
+    }
+
+    //--------------------------------------------update the progress of a book ----------------------------------------
+    @PutMapping("/user/{id}/savedbook/{bookId}/progress")
+    public User updateProgress(@PathVariable String id,@PathVariable String bookId, @RequestBody String progress){
+        return userService.updateProgress(id,bookId,progress);
+    }
+
 
 }

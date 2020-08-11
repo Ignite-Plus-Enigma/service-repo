@@ -94,4 +94,26 @@ public class UserService {
         return saved;
     }
 
+    //-----------------------------------mark a book finished ----------------------------------------------------------
+    public User markfinished(String id,String bookId){
+        User user = getById(id);
+        for(SavedBook book : user.getSavedBooks()){
+            if(book.getBookId().equals(bookId)){
+                book.setIsFinished("True");
+            }
+        }
+        return user;
+    }
+
+    //----------------------------------------------update progress of a book-------------------------------------------
+    public User updateProgress(String id, String bookId, String progress){
+        User user = getById(id);
+        for(SavedBook book : user.getSavedBooks()){
+            if(book.getBookId().equals(bookId)){
+                book.setProgress(progress);
+            }
+        }
+        return user;
+    }
+
 }
