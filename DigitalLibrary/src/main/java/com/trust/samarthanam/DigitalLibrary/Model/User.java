@@ -11,20 +11,11 @@ import java.util.List;
 public class User {
     @Id
     @Field("_id")
-    private String id;
-    @Field("google_id")
     private String googleId;
     @Field("saved_books")
-    private List<Object> savedBooks;
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private List<SavedBook> savedBooks;
+    @Field("role")
+    private String role;
 
     public String getGoogleId() {
         return googleId;
@@ -34,20 +25,28 @@ public class User {
         this.googleId = googleId;
     }
 
-    public List<Object> getSavedBooks() {
+    public List<SavedBook> getSavedBooks() {
         return savedBooks;
     }
 
-    public void setSavedBooks(List<Object> savedBooks) {
+    public void setSavedBooks(List<SavedBook> savedBooks) {
         this.savedBooks = savedBooks;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", googleId='" + googleId + '\'' +
+                "googleId='" + googleId + '\'' +
                 ", savedBooks=" + savedBooks +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

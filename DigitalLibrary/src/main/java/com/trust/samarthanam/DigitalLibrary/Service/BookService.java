@@ -86,6 +86,11 @@ public class BookService {
         else
             return b;
     }
+
+    public Books saveBook(Books book){
+        booksRepo.save(book);
+        return book;
+    }
 }
 
 

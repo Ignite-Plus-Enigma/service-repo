@@ -55,6 +55,11 @@ public class BooksController {
         return bookService.getBooksBySubCategory(key);
     }
 
+    @PostMapping("/books/save")
+    public Books savebook(@RequestBody Books book){
+        return bookService.saveBook(book);
+    }
+
 
 }
 
