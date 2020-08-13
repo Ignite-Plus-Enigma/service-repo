@@ -1,6 +1,7 @@
 package com.trust.samarthanam.DigitalLibrary.Service;
 
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
+import com.trust.samarthanam.DigitalLibrary.Model.Progress;
 import com.trust.samarthanam.DigitalLibrary.Model.SavedBook;
 import com.trust.samarthanam.DigitalLibrary.Model.User;
 import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
@@ -65,6 +66,22 @@ public class UserService {
         }
     }
 
+    //------------------------------------- unsave a book---------------------------------------------------------------
+    public String unsaveBook(String id, String bookid){
+        User user = getById(id);
+        if(user!=null){
+            for (SavedBook book : user.getSavedBooks()){
+                if(book.getBookId().equals(bookid)){
+                    user.getSavedBooks().remove(book);
+                    userRepo.save(user);
+                }
+            }
+
+        }
+        return "Success";
+    }
+
+
     //-------------------------------------------get role of a user-----------------------------------------------------
     public String getrole(String id){
         User user = getById(id);
@@ -100,19 +117,39 @@ public class UserService {
         for(SavedBook book : user.getSavedBooks()){
             if(book.getBookId().equals(bookId)){
                 book.setIsFinished("True");
+
             }
         }
+        userRepo.save(user);
+        return user;
+    }
+
+
+    public User markUnfinished(String id,String bookId){
+        User user = getById(id);
+        for(SavedBook book : user.getSavedBooks()){
+            if(book.getBookId().equals(bookId)){
+                book.setIsFinished("False");
+
+            }
+        }
+        userRepo.save(user);
         return user;
     }
 
     //----------------------------------------------update progress of a book-------------------------------------------
-    public User updateProgress(String id, String bookId, String progress){
+    public User updateProgress(String id, String bookId, Progress progress){
         User user = getById(id);
         for(SavedBook book : user.getSavedBooks()){
             if(book.getBookId().equals(bookId)){
-                book.setProgress(progress);
+                for (Progress p : book.getProgress()){
+                    if(p.getFormat().equals(progress.getFormat())){
+                        p.setPercentage(progress.getPercentage());
+                    }
+                }
             }
         }
+        userRepo.save(user);
         return user;
     }
 

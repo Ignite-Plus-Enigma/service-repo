@@ -3,15 +3,16 @@ package com.trust.samarthanam.DigitalLibrary.Model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 public class SavedBook {
     @Field("book_id")
     private String bookId;
-    @Field("format")
-    private String format;
     @Field("progress")
-    private String progress;
+    private List<Progress> progress;
     @Field("is_finished")
     private String isFinished;
+
 
     public String getBookId() {
         return bookId;
@@ -21,19 +22,11 @@ public class SavedBook {
         this.bookId = bookId;
     }
 
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public String getProgress() {
+    public List<Progress> getProgress() {
         return progress;
     }
 
-    public void setProgress(String progress) {
+    public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
@@ -49,8 +42,7 @@ public class SavedBook {
     public String toString() {
         return "SavedBook{" +
                 "bookId='" + bookId + '\'' +
-                ", format='" + format + '\'' +
-                ", progress='" + progress + '\'' +
+                ", progress=" + progress +
                 ", isFinished='" + isFinished + '\'' +
                 '}';
     }

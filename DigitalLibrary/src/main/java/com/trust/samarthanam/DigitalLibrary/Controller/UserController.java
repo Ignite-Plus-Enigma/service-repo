@@ -1,6 +1,7 @@
 package com.trust.samarthanam.DigitalLibrary.Controller;
 
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
+import com.trust.samarthanam.DigitalLibrary.Model.Progress;
 import com.trust.samarthanam.DigitalLibrary.Model.SavedBook;
 import com.trust.samarthanam.DigitalLibrary.Model.User;
 import com.trust.samarthanam.DigitalLibrary.Service.BookService;
@@ -28,10 +29,23 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+
+    //-------------------------------------------get user by id---------------------------------------------------------
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable String id){
+        return userService.getById(id);
+    }
+
     //----------------------------------------------save a book of a user-----------------------------------------------
     @PostMapping("/user/{id}/savebook")
     public User savebook(@PathVariable String id, @RequestBody SavedBook book){
         return userService.saveBook(id,book);
+    }
+
+
+    @DeleteMapping("/user/{id}/unsavebook/{bookid}")
+    public String unsavebook(@PathVariable String id, @PathVariable String bookid){
+        return userService.unsaveBook(id,bookid);
     }
 
     //--------------------------------------------save a user-----------------------------------------------------------
@@ -58,11 +72,19 @@ public class UserController {
             return userService.markfinished(id,bookId);
     }
 
+    //--------------------------------------------mark a book unfinished-----------------------------------------------
+    @PutMapping("/user/{id}/savedbook/{bookId}/markUnfinished")
+    public User markUnfinished(@PathVariable String id,@PathVariable String bookId){
+        return userService.markUnfinished(id,bookId);
+    }
+
     //--------------------------------------------update the progress of a book ----------------------------------------
     @PutMapping("/user/{id}/savedbook/{bookId}/progress")
-    public User updateProgress(@PathVariable String id,@PathVariable String bookId, @RequestBody String progress){
+    public User updateProgress(@PathVariable String id,@PathVariable String bookId, @RequestBody Progress progress){
         return userService.updateProgress(id,bookId,progress);
     }
+
+
 
 
 }
