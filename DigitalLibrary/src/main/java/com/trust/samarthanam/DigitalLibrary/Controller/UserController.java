@@ -43,8 +43,8 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/user/{id}/unsavebook/{bookid}")
-    public String unsavebook(@PathVariable String id, @PathVariable String bookid){
+    @PutMapping("/user/{id}/unsavebook/{bookid}")
+    public User unsavebook(@PathVariable String id, @PathVariable String bookid){
         return userService.unsaveBook(id,bookid);
     }
 
@@ -82,6 +82,12 @@ public class UserController {
     @PutMapping("/user/{id}/savedbook/{bookId}/progress")
     public User updateProgress(@PathVariable String id,@PathVariable String bookId, @RequestBody Progress progress){
         return userService.updateProgress(id,bookId,progress);
+    }
+
+    //----------------------------------continue reading book of a particular user--------------------------------------
+    @GetMapping("/user/{id}/continuereading")
+    public ArrayList<Optional<Books>> getContinueReadingBooks(@PathVariable String id){
+        return userService.getContinueReadingBooks(id);
     }
 
 

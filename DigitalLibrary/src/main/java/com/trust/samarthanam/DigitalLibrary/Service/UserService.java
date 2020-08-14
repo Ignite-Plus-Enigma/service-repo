@@ -57,6 +57,11 @@ public class UserService {
     public User saveBook(String id, SavedBook savebook){
         User user = getById(id);
         if(user!=null){
+            for(SavedBook book : user.getSavedBooks()){
+                if(book.getBookId().equals(savebook.getBookId())){
+                    return null;
+                }
+            }
             System.out.println(user.getSavedBooks().add((SavedBook) savebook));
             userRepo.save(user);
             return user;
@@ -67,20 +72,29 @@ public class UserService {
     }
 
     //------------------------------------- unsave a book---------------------------------------------------------------
-    public String unsaveBook(String id, String bookid){
+    public User unsaveBook(String id, String bookid){
         User user = getById(id);
-        if(user!=null){
-            for (SavedBook book : user.getSavedBooks()){
-                if(book.getBookId().equals(bookid)){
-                    user.getSavedBooks().remove(book);
-                    userRepo.save(user);
-                }
+        List<SavedBook> s = user.getSavedBooks();
+        for(SavedBook b : s){
+            if(b.getBookId().equals(bookid)){
+                s.remove(b);
+
             }
-
+//            user.setSavedBooks(s);
         }
-        return "Success";
+        userRepo.save(user);
+       return user;
     }
-
+// if(user!=null){
+//        for (SavedBook book : user.getSavedBooks()){
+//            if(book.getBookId().equals(bookid)){
+//                user.getSavedBooks().remove(book);
+//
+//            }
+//        }
+//    }
+//        userRepo.save(user);
+//        return "Success";
 
     //-------------------------------------------get role of a user-----------------------------------------------------
     public String getrole(String id){
@@ -151,6 +165,20 @@ public class UserService {
         }
         userRepo.save(user);
         return user;
+    }
+
+    //----------------------------------------------continue reading----------------------------------------------------
+    public ArrayList<Optional<Books>> getContinueReadingBooks(String id){
+        User user = getById(id);
+        ArrayList<Optional<Books>> savedbooks = new ArrayList<>();
+        for(SavedBook book : user.getSavedBooks()){
+            for(Progress p : book.getProgress()){
+                if(p.getPercentage()>0){
+                    savedbooks.add(booksRepo.findById(book.getBookId()));
+                }
+            }
+        }
+        return savedbooks;
     }
 
 }
