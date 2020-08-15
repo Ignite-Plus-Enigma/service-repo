@@ -16,26 +16,28 @@ public class HomePageController {
     @Autowired
     private HomeService homeService;
 
-//-------------------------------------get books by language-----------------------------------------------------------
-    @GetMapping("books/language/{key}")
-    public Collection<Books> findBooksByLanguage(@PathVariable String key){
-        return homeService.findBooksByLanguage(key);
-    }
+////-------------------------------------get books by language-----------------------------------------------------------
+//    @GetMapping("books/language/{key}")
+//    public Collection<Books> findBooksByLanguage(@PathVariable String key){
+//        return homeService.findBooksByLanguage(key);
+//    }
+//
+//////----------------------------------get books by category---------------------------------------------------------------
+//    @GetMapping("/books/category/{key}")
+//    public Collection<Books> findBooksByCategory(@PathVariable String key){
+//        return homeService.findBooksByCategory(key);
+//    }
+//
+//    @GetMapping("/books/recentlyadded")
+//    public List<Books> findRecentlyAddedBooks(){
+//        return homeService.findRecentlyAddedBooks();
+//    }
+//
+//
+//    @GetMapping("/books/mostviewed")
+//    public List<Books> getMostViewedBooks(){
+//        return homeService.getMostViewedBooks();
+//    }
 
-////----------------------------------get books by category---------------------------------------------------------------
-    @GetMapping("/books/category/{key}")
-    public Collection<Books> findBooksByCategory(@PathVariable String key){
-        return homeService.findBooksByCategory(key);
-    }
 
-    @GetMapping("/books/recentlyadded")
-    public List<Books> findRecentlyAddedBooks(){
-        return homeService.findRecentlyAddedBooks();
-    }
-
-
-    @GetMapping("/books/mostviewed")
-    public List<Books> getMostViewedBooks(){
-        return homeService.getMostViewedBooks();
-    }
 }

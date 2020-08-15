@@ -19,45 +19,50 @@ public class BooksController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/")
-    public String welcome() {
-        return "Welcome to Samarthanam";
-    }
+//    @GetMapping("/")
+//    public String welcome() {
+//        return "Welcome to Samarthanam";
+//    }
+//
+//    //----------------------------------------------------get all books-------------------------------------------------
+//    @GetMapping("/books")
+//    public ResponseEntity<List<Books>> getBooks() {
+//        return ResponseEntity.ok().body((bookService.listBooks()));
+//    }
+//
+//    //----------------------------------------------------get books by format-------------------------------------------
+//
+//    @GetMapping("/books/format/{key}")
+//    public List<Books> getBookByFormat(@PathVariable String key){
+//        return bookService.getBookByFormat(key);
+//    }
+//
+//    //---------------------------------------------------get book by id-------------------------------------------------
+//    @GetMapping("/books/{id}")
+//    public ResponseEntity<Books> getBookbyid(@PathVariable String id) {
+//        return ResponseEntity.ok().body((bookService.getById(id)));
+//    }
+//
+//   //------------------------------------------------get book by keywords----------------------------------------------
+//    @GetMapping("/books/search={key}")
+//    public ResponseEntity<Collection<Books>> findBook(@PathVariable String key) {
+//        return ResponseEntity.ok().body((bookService.searchBooks(key)));
+//    }
+//
+//    //--------------------------------------------get books by subcategory----------------------------------------------
+//    @GetMapping("/books/subcategory/{key}")
+//    public Collection<Books> findBooksByTopic( @PathVariable String key) {
+//        return bookService.getBooksBySubCategory(key);
+//    }
+//
+//    @PostMapping("/books/save")
+//    public Books savebook(@RequestBody Books book){
+//        return bookService.saveBook(book);
+//    }
 
-    //----------------------------------------------------get all books-------------------------------------------------
-    @GetMapping("/books")
-    public ResponseEntity<List<Books>> getBooks() {
-        return ResponseEntity.ok().body((bookService.listBooks()));
-    }
-
-    //----------------------------------------------------get books by format-------------------------------------------
-
-    @GetMapping("/books/format/{key}")
-    public List<Books> getBookByFormat(@PathVariable String key){
-        return bookService.getBookByFormat(key);
-    }
-
-    //---------------------------------------------------get book by id-------------------------------------------------
-    @GetMapping("/books/{id}")
-    public ResponseEntity<Books> getBookbyid(@PathVariable String id) {
-        return ResponseEntity.ok().body((bookService.getById(id)));
-    }
-
-   //------------------------------------------------get book by keywords----------------------------------------------
-    @GetMapping("/books/search={key}")
-    public ResponseEntity<Collection<Books>> findBook(@PathVariable String key) {
-        return ResponseEntity.ok().body((bookService.searchBooks(key)));
-    }
-
-    //--------------------------------------------get books by subcategory----------------------------------------------
-    @GetMapping("/books/subcategory/{key}")
-    public Collection<Books> findBooksByTopic( @PathVariable String key) {
-        return bookService.getBooksBySubCategory(key);
-    }
-
-    @PostMapping("/books/save")
-    public Books savebook(@RequestBody Books book){
-        return bookService.saveBook(book);
+    @GetMapping("/test/books")
+    public List<Books> getAll(){
+        return bookService.listAll();
     }
 
 
