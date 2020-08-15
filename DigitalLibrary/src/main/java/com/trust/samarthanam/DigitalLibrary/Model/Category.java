@@ -7,7 +7,7 @@ import java.util.List;
 
 @Document(collection = "Category")
 public class Category {
-    @Field("category")
+    @Field("_id")
     private String category;
     @Field ("sub_category")
     private List<String> subCategory;

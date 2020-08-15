@@ -33,8 +33,8 @@ public class CategoryController {
         return categoryService.listSubCategory(key);
     }
 
-    @GetMapping("/books/format/{format}/subcategory/{subName}")
-    public List<Books> findBooksbyFormat(@PathVariable String format,@PathVariable String subName){
-        return categoryService.listFormatBooks(format,subName);
-    }
+//    @GetMapping("/books/format/{format}/subcategory/{subName}")
+//    public List<Books> findBooksbyFormat(@PathVariable String format,@PathVariable String subName){
+//        return categoryService.listFormatBooks(format,subName);
+//    }
 }

@@ -59,18 +59,18 @@ public class CategoryService {
         return mongoTemplate.find(query, Category.class);
     }
 
-    public List<Books> listFormatBooks(String format,String subName) {
-
-        List<Books> test =booksRepo.findAll();
-        List<Books> formatBook = new ArrayList<>();
-        List<Books> books = new ArrayList<>();
-        for (Books book : test){
-            List<String> subCategory=book.getSubCategory();
-            Map<String, Object> list = book.getFormat();
-            if(list.get(format) != null && subCategory.contains(subName)){
-                formatBook.add(book);
-            }
-        }
-        return formatBook;
-    }
+//    public List<Books> listFormatBooks(String format,String subName) {
+//
+//        List<Books> test =booksRepo.findAll();
+//        List<Books> formatBook = new ArrayList<>();
+//        List<Books> books = new ArrayList<>();
+//        for (Books book : test){
+//            List<String> subCategory=book.getSubCategory();
+//            Map<String, Object> list = book.getFormat();
+//            if(list.get(format) != null && subCategory.contains(subName)){
+//                formatBook.add(book);
+//            }
+//        }
+//        return formatBook;
+//    }
 }

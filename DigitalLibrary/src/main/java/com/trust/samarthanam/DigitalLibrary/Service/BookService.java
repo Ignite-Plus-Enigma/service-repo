@@ -2,6 +2,7 @@ package com.trust.samarthanam.DigitalLibrary.Service;
 
 import com.trust.samarthanam.DigitalLibrary.Exceptions.BookNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
+import com.trust.samarthanam.DigitalLibrary.Model.Format;
 import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -19,43 +20,35 @@ public class BookService {
 
 //---------------------------------------list all books-----------------------------------------------------------------
     public List<Books> listBooks() {
-        ArrayList<Books> test = new ArrayList<>();
-        test = (ArrayList<Books>) booksRepo.findAll();
-        for (Books book : test){
-            System.out.println(book.getFormat());
-            Map<String, Object> list = book.getFormat();
-        }
-         return (List<Books>) booksRepo.findAll();
-
+        return booksRepo.findAll();
     }
 
-    public List<Books> getBookByFormat(String format){
+    public List<Books> getBookByFormat(String key){
         ArrayList<Books> test = new ArrayList<>();
+        ArrayList<Books> bookByFormat = new ArrayList<>();
         test = (ArrayList<Books>) booksRepo.findAll();
-        ArrayList<Books> fbook = new ArrayList<>();
-        for (Books book : test){
-            Map<String, Object> list = book.getFormat();
-            if(list.get(format) != null){
-                fbook.add(book);
+        for(Books book : test){
+            for(Format f : book.getFormat()){
+                if(f.getType().equals(key)){
+                    bookByFormat.add(book);
+                }
             }
         }
-        return fbook;
+        return bookByFormat;
+
     }
 //---------------------------------------get books by id----------------------------------------------------------------
-    public Books getById(String id)
+    public Books getById(int id)
     {
-//        Optional<Books> optionalBooks = booksRepo.findById(id);
-//        if(optionalBooks.isEmpty())
-//            throw new BookNotFoundException("Book Not Found!");
-//        return optionalBooks;
         Collection<Books> books = booksRepo.findAll();
         for(Books book : books){
-            if(book.getId().equals(id)){
+            if(book.getId() == id){
                 return book;
             }
         }
         return null;
     }
+
 ////-------------------------------------get books by keywords------------------------------------------------------------
     @Autowired
     MongoTemplate mongoTemplate;

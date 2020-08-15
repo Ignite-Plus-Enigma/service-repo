@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Books {
     @Field("_id")
-    private String id;
+    private int id;
     @Field("name")
     private String name;
     @Field("isbn")
@@ -20,7 +20,7 @@ public class Books {
     @Field("author")
     private String author;
     @Field("format")
-    private Map<String,Object> format;
+    private List<Format> format;
     @Field("language")
     private String language;
     @Field("book_image")
@@ -30,34 +30,18 @@ public class Books {
     @Field("views")
     private int views;
     @Field("category")
-    private String category;
+    private List<String> category;
     @Field("sub_category")
     private List<String> subCategory;
     @Field("rating")
     private int rating;
 
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public List<String> getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(List<String> subCategory) {
-        this.subCategory = subCategory;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -85,11 +69,11 @@ public class Books {
         this.author = author;
     }
 
-    public Map<String, Object> getFormat() {
+    public List<Format> getFormat() {
         return format;
     }
 
-    public void setFormat(Map<String, Object> format) {
+    public void setFormat(List<Format> format) {
         this.format = format;
     }
 
@@ -125,6 +109,22 @@ public class Books {
         this.views = views;
     }
 
+    public List<String> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<String> category) {
+        this.category = category;
+    }
+
+    public List<String> getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(List<String> subCategory) {
+        this.subCategory = subCategory;
+    }
+
     public int getRating() {
         return rating;
     }
@@ -136,7 +136,7 @@ public class Books {
     @Override
     public String toString() {
         return "Books{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", author='" + author + '\'' +
@@ -145,7 +145,7 @@ public class Books {
                 ", bookImage='" + bookImage + '\'' +
                 ", description='" + description + '\'' +
                 ", views=" + views +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", subCategory=" + subCategory +
                 ", rating=" + rating +
                 '}';

@@ -39,14 +39,14 @@ public class BooksController {
 
     //---------------------------------------------------get book by id-------------------------------------------------
     @GetMapping("/books/{id}")
-    public ResponseEntity<Books> getBookbyid(@PathVariable String id) {
+    public ResponseEntity<Books> getBookbyid(@PathVariable int id) {
         return ResponseEntity.ok().body((bookService.getById(id)));
     }
 
    //------------------------------------------------get book by keywords----------------------------------------------
     @GetMapping("/books/search={key}")
-    public ResponseEntity<Collection<Books>> findBook(@PathVariable String key) {
-        return ResponseEntity.ok().body((bookService.searchBooks(key)));
+    public List<Books> findBook(@PathVariable String key) {
+        return (List<Books>) bookService.searchBooks(key);
     }
 
     //--------------------------------------------get books by subcategory----------------------------------------------
