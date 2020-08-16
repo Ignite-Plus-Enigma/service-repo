@@ -24,6 +24,7 @@ public class UploadController {
     public Category addNewCategory(@RequestBody Category newCat){
         return uploadService.addCategory(newCat);
     }
+
     @PutMapping("/oldCatAndNewsubCat/add")
     public Category addNewCategoryOldsubCat(@RequestBody Category newCat) {
         return uploadService.addoldCatAndnewSubCat(newCat);
