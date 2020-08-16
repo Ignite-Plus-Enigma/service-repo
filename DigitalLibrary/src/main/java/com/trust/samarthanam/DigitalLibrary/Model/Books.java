@@ -1,6 +1,7 @@
 package com.trust.samarthanam.DigitalLibrary.Model;
 
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -11,6 +12,8 @@ import java.util.Map;
 @Document(collection = "Books")
 
 public class Books {
+    @Transient
+    public  static final String SEQUENCE_NAME="books_sequence";
     @Field("_id")
     private int id;
     @Field("name")
