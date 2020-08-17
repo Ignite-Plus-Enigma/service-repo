@@ -100,8 +100,11 @@ public class UserService {
         if(user!=null){
             for(SavedBook book : user.getSavedBooks()){
                 int bookId = book.getBookId();
-                Books save = bookService.getById(bookId);
-                saved.add(save);
+                if(book.getIsFinished().equals("False")){
+                    Books save = bookService.getById(bookId);
+                    saved.add(save);
+                }
+
             }
             return saved;
         }
