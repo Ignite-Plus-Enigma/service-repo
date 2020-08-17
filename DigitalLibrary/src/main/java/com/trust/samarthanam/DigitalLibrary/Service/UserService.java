@@ -77,14 +77,16 @@ public class UserService {
     //------------------------------------- unsave a book---------------------------------------------------------------
     public User unsaveBook(String id, String bookid){
         User user = getById(id);
-        List<SavedBook> s = user.getSavedBooks();
-        for(SavedBook b : s){
-            if(b.getBookId().equals(bookid)){
-                s.remove(b);
+        List<SavedBook> savedbooks = user.getSavedBooks();
+        for(SavedBook book : savedbooks){
+            if(book.getBookId().equals(bookid)){
+                savedbooks.remove(book);
+                user.setSavedBooks(savedbooks);
+                userRepo.save(user);
+                return user;
             }
         }
-        userRepo.save(user);
-       return user;
+        throw new  UserNotFoundException(" ");
     }
 
     //-------------------------------------------get role of a user-----------------------------------------------------
