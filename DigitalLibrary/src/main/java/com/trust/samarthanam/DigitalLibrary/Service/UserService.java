@@ -66,9 +66,7 @@ public class UserService {
             userRepo.save(user);
             return user;
         }
-        else{
-            return null;
-        }
+        return user;
     }
 
     //------------------------------------- unsave a book---------------------------------------------------------------
@@ -78,23 +76,12 @@ public class UserService {
         for(SavedBook b : s){
             if(b.getBookId().equals(bookid)){
                 s.remove(b);
-
             }
-//            user.setSavedBooks(s);
         }
         userRepo.save(user);
        return user;
     }
-// if(user!=null){
-//        for (SavedBook book : user.getSavedBooks()){
-//            if(book.getBookId().equals(bookid)){
-//                user.getSavedBooks().remove(book);
-//
-//            }
-//        }
-//    }
-//        userRepo.save(user);
-//        return "Success";
+
 
     //-------------------------------------------get role of a user-----------------------------------------------------
     public String getrole(String id){
