@@ -49,7 +49,7 @@ public class BookService {
         return null;
     }
 
-////-------------------------------------get books by keywords------------------------------------------------------------
+//-------------------------------------get books by keywords------------------------------------------------------------
     @Autowired
     MongoTemplate mongoTemplate;
 
@@ -69,7 +69,7 @@ public class BookService {
             return b;
     }
 
-////----------------------------------------get books by subcategory/topic------------------------------------------------
+//----------------------------------------get books by subcategory/topic------------------------------------------------
     public Collection getBooksBySubCategory(String key) {
         Collection<Books> b = mongoTemplate.find(Query.query(new Criteria()
                 .andOperator(Criteria.where("subCategory").regex(key, "i")

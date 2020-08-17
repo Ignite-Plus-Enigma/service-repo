@@ -21,7 +21,7 @@ public class UploadService {
     CategoryRepo categoryRepo;
 
     public Books addBook(Books newBook) {
-//        newBook.setId(nextSequenceService.getNextSequence(Books.SEQUENCE_NAME));
+      newBook.setId(nextSequenceService.getNextSequence(Books.SEQUENCE_NAME));
         booksRepo.save(newBook);
 
         return newBook;

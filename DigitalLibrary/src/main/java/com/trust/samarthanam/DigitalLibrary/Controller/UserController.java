@@ -31,7 +31,7 @@ public class UserController {
 
 
     //-------------------------------------------get user by id---------------------------------------------------------
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public User getUserById(@PathVariable String id){
         return userService.getById(id);
     }
@@ -42,7 +42,7 @@ public class UserController {
         return userService.saveBook(id,book);
     }
 
-
+    //------------------------------------------unsave a book of a user-------------------------------------------------
     @PutMapping("/user/{id}/unsavebook/{bookid}")
     public User unsavebook(@PathVariable String id, @PathVariable String bookid){
         return userService.unsaveBook(id,bookid);

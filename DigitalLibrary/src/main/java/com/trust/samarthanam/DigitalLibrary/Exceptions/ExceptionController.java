@@ -13,5 +13,13 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(BookNotFoundException exception) {
         return new ResponseEntity<>("Sorry!! Book not available", HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(value = UserNotFoundException.class)
+    public ResponseEntity<Object> exception(UserNotFoundException exception) {
+        return new ResponseEntity<>("Sorry!! User not available", HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(value = CategoryNotFoundException.class)
+    public ResponseEntity<Object> exception(CategoryNotFoundException exception) {
+        return new ResponseEntity<>("Sorry!! Category not available", HttpStatus.NOT_FOUND);
+    }
 }
 

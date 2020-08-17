@@ -22,7 +22,7 @@ public class HomePageController {
         return homeService.findBooksByLanguage(key);
     }
 
-////----------------------------------get books by category---------------------------------------------------------------
+//----------------------------------get books by category---------------------------------------------------------------
     @GetMapping("/books/category/{key}")
     public Collection<Books> findBooksByCategory(@PathVariable String key){
         return homeService.findBooksByCategory(key);
