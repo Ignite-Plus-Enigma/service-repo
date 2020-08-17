@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -29,7 +28,6 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-
     //-------------------------------------------get user by id---------------------------------------------------------
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable String id){
@@ -44,7 +42,7 @@ public class UserController {
 
     //------------------------------------------unsave a book of a user-------------------------------------------------
     @PutMapping("/user/{id}/unsavebook/{bookid}")
-    public User unsavebook(@PathVariable String id, @PathVariable String bookid){
+    public User unsavebook(@PathVariable String id, @PathVariable int bookid){
         return userService.unsaveBook(id,bookid);
     }
 
@@ -62,31 +60,31 @@ public class UserController {
 
     //-------------------------------------------get all the saved books of a particular user---------------------------
     @GetMapping("/user/{id}/savedbooks")
-    public ArrayList<Optional<Books>> getsavedbooks(@PathVariable String id){
+    public ArrayList<Books> getsavedbooks(@PathVariable String id){
         return userService.getsavedbooks(id);
     }
 
     //----------------------------------------------mark a book finished -----------------------------------------------
     @PutMapping("/user/{id}/savedbook/{bookId}/markfinished")
-    public User markfinished(@PathVariable String id,@PathVariable String bookId){
+    public User markfinished(@PathVariable String id,@PathVariable int bookId){
             return userService.markfinished(id,bookId);
     }
 
     //--------------------------------------------mark a book unfinished-----------------------------------------------
     @PutMapping("/user/{id}/savedbook/{bookId}/markUnfinished")
-    public User markUnfinished(@PathVariable String id,@PathVariable String bookId){
+    public User markUnfinished(@PathVariable String id,@PathVariable int bookId){
         return userService.markUnfinished(id,bookId);
     }
 
     //--------------------------------------------update the progress of a book ----------------------------------------
     @PutMapping("/user/{id}/savedbook/{bookId}/progress")
-    public User updateProgress(@PathVariable String id,@PathVariable String bookId, @RequestBody Progress progress){
+    public User updateProgress(@PathVariable String id,@PathVariable int bookId, @RequestBody Progress progress){
         return userService.updateProgress(id,bookId,progress);
     }
 
     //----------------------------------continue reading book of a particular user--------------------------------------
     @GetMapping("/user/{id}/continuereading")
-    public ArrayList<Optional<Books>> getContinueReadingBooks(@PathVariable String id){
+    public ArrayList<Books> getContinueReadingBooks(@PathVariable String id){
         return userService.getContinueReadingBooks(id);
     }
 

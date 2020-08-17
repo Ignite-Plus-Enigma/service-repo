@@ -16,7 +16,6 @@ import java.util.List;
 
 @Repository
 public interface BooksRepo extends MongoRepository<Books, String> {
-
 }
 
 

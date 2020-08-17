@@ -5,8 +5,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Progress {
     @Field("format")
     private String format;
-    @Field("percentage")
-    private int percentage;
+    @Field("length")
+    private long length;//length
+    @Field("remaining")
+    private long remaining;
 
     public String getFormat() {
         return format;
@@ -16,19 +18,28 @@ public class Progress {
         this.format = format;
     }
 
-    public int getPercentage() {
-        return percentage;
+    public long getLength() {
+        return length;
     }
 
-    public void setPercentage(int percentage) {
-        this.percentage = percentage;
+    public void setLength(long length) {
+        this.length = length;
+    }
+
+    public long getRemaining() {
+        return remaining;
+    }
+
+    public void setRemaining(long remaining) {
+        this.remaining = remaining;
     }
 
     @Override
     public String toString() {
         return "Progress{" +
                 "format='" + format + '\'' +
-                ", percentage=" + percentage +
+                ", length=" + length +
+                ", remaining=" + remaining +
                 '}';
     }
 }

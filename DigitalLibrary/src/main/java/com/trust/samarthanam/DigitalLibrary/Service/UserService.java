@@ -1,6 +1,5 @@
 package com.trust.samarthanam.DigitalLibrary.Service;
 
-import com.trust.samarthanam.DigitalLibrary.Exceptions.BookNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Exceptions.UserNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
 import com.trust.samarthanam.DigitalLibrary.Model.Progress;
@@ -10,12 +9,9 @@ import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
 import com.trust.samarthanam.DigitalLibrary.dao.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +21,8 @@ public class UserService {
     private UserRepo userRepo;
     @Autowired
     private BooksRepo booksRepo;
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     MongoTemplate mongoTemplate;
@@ -63,7 +61,7 @@ public class UserService {
         User user = getById(id);
         if(user!=null){
             for(SavedBook book : user.getSavedBooks()){
-                if(book.getBookId().equals(savebook.getBookId())){
+                if(book.getBookId() ==(savebook.getBookId())){
                     return user;
                 }
             }
@@ -75,11 +73,11 @@ public class UserService {
     }
 
     //------------------------------------- unsave a book---------------------------------------------------------------
-    public User unsaveBook(String id, String bookid){
+    public User unsaveBook(String id, int bookid){
         User user = getById(id);
         List<SavedBook> savedbooks = user.getSavedBooks();
         for(SavedBook book : savedbooks){
-            if(book.getBookId().equals(bookid)){
+            if(book.getBookId()==(bookid)){
                 savedbooks.remove(book);
                 user.setSavedBooks(savedbooks);
                 userRepo.save(user);
@@ -96,13 +94,13 @@ public class UserService {
     }
 
     //-------------------------------get all saved books of a user------------------------------------------------------
-    public ArrayList<Optional<Books>> getsavedbooks(String id){
+    public ArrayList<Books> getsavedbooks(String id){
         User user = getById(id);
-        ArrayList<Optional<Books>> saved = new ArrayList<>();
+        ArrayList<Books> saved = new ArrayList<>();
         if(user!=null){
             for(SavedBook book : user.getSavedBooks()){
-                String bookId = book.getBookId();
-                Optional<Books> save = booksRepo.findById(bookId);
+                int bookId = book.getBookId();
+                Books save = bookService.getById(bookId);
                 saved.add(save);
             }
             return saved;
@@ -112,10 +110,10 @@ public class UserService {
     }
 
     //-----------------------------------mark a book finished ----------------------------------------------------------
-    public User markfinished(String id,String bookId){
+    public User markfinished(String id,int bookId){
         User user = getById(id);
         for(SavedBook book : user.getSavedBooks()){
-            if(book.getBookId().equals(bookId)){
+            if((bookId) == book.getBookId()){
                 book.setIsFinished("True");
 
             }
@@ -125,10 +123,10 @@ public class UserService {
     }
 
     //--------------------------------mark a book unfinished-------------------------------------------------------------
-    public User markUnfinished(String id,String bookId){
+    public User markUnfinished(String id,int  bookId){
         User user = getById(id);
         for(SavedBook book : user.getSavedBooks()){
-            if(book.getBookId().equals(bookId)){
+            if(book.getBookId() ==(bookId)){
                 book.setIsFinished("False");
 
             }
@@ -138,13 +136,14 @@ public class UserService {
     }
 
     //----------------------------------------------update progress of a book-------------------------------------------
-    public User updateProgress(String id, String bookId, Progress progress){
+    public User updateProgress(String id, int bookId, Progress progress){
         User user = getById(id);
         for(SavedBook book : user.getSavedBooks()){
-            if(book.getBookId().equals(bookId)){
+            if(book.getBookId()==(bookId)){
                 for (Progress p : book.getProgress()){
                     if(p.getFormat().equals(progress.getFormat())){
-                        p.setPercentage(progress.getPercentage());
+                        p.setLength(progress.getLength());
+                        System.out.println(p.getLength());
                     }
                 }
             }
@@ -154,13 +153,13 @@ public class UserService {
     }
 
     //----------------------------------------------continue reading----------------------------------------------------
-    public ArrayList<Optional<Books>> getContinueReadingBooks(String id){
+    public ArrayList<Books> getContinueReadingBooks(String id){
         User user = getById(id);
-        ArrayList<Optional<Books>> savedbooks = new ArrayList<>();
+        ArrayList<Books> savedbooks = new ArrayList<>();
         for(SavedBook book : user.getSavedBooks()){
             for(Progress p : book.getProgress()){
-                if(p.getPercentage()>0){
-                    savedbooks.add(booksRepo.findById(book.getBookId()));
+                if(p.getLength()>0){
+                    savedbooks.add(bookService.getById(book.getBookId()));
                 }
             }
         }

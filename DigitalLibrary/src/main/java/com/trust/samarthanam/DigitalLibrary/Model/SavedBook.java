@@ -7,18 +7,18 @@ import java.util.List;
 
 public class SavedBook {
     @Field("book_id")
-    private String bookId;
+    private int bookId;
     @Field("progress")
     private List<Progress> progress;
     @Field("is_finished")
     private String isFinished;
 
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
