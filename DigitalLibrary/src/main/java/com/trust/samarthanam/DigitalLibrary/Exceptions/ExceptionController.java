@@ -21,5 +21,10 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(CategoryNotFoundException exception) {
         return new ResponseEntity<>("Sorry!! Category not available", HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(value = InvalidIdException.class)
+    public ResponseEntity<Object> exception(InvalidIdException exception) {
+        return new ResponseEntity<>("Invalid ID", HttpStatus.NOT_FOUND);
+    }
+
 }
 

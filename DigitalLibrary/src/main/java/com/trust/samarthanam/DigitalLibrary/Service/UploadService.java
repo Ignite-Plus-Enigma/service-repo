@@ -1,7 +1,9 @@
 package com.trust.samarthanam.DigitalLibrary.Service;
 
+import com.trust.samarthanam.DigitalLibrary.Exceptions.UserNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
 import com.trust.samarthanam.DigitalLibrary.Model.Category;
+import com.trust.samarthanam.DigitalLibrary.Model.SavedBook;
 import com.trust.samarthanam.DigitalLibrary.Model.User;
 import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
 import com.trust.samarthanam.DigitalLibrary.dao.CategoryRepo;
@@ -21,7 +23,7 @@ public class UploadService {
     CategoryRepo categoryRepo;
 
     public Books addBook(Books newBook) {
-      newBook.setId(nextSequenceService.getNextSequence(Books.SEQUENCE_NAME));
+        newBook.setId(nextSequenceService.getNextSequence(Books.SEQUENCE_NAME));
         booksRepo.save(newBook);
 
         return newBook;
@@ -54,36 +56,18 @@ public class UploadService {
 //            }
 //        }
 //        return null;
-        String Cat = newCat.getCategory();
-        List<String> subcat = newCat.getSubCategory();
-        List<Category> c = categoryRepo.findAll();
-        List<String> y = new ArrayList<>();
-
-        for (Category x : c) {
-            if (x.getCategory().equals(Cat)) {
-                y = x.getSubCategory();
-            }
+        String category = newCat.getCategory();
+        List<String> subcategory = newCat.getSubCategory();
+        Category cat = categoryRepo.findById(category).get();
+        List<String> subCat = cat.getSubCategory();
+        for (String s: subCat) {
+            subcategory.add(s);
         }
-        for (String s : subcat) {
-            y.add(s);
-        }
-        for (Category x : c) {
-            if (x.getCategory().equals(Cat)) {
-                categoryRepo.save(x);
-            }
+        cat.setSubCategory(subcategory);
+        System.out.println(cat);
+        categoryRepo.save(cat);
+        return cat;
 
 
-
-
-        }
-        return null;
     }
 }
-
-
-
-
-
-
-
-
