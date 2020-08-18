@@ -1,6 +1,7 @@
 package com.trust.samarthanam.DigitalLibrary.Service;
 
 import com.trust.samarthanam.DigitalLibrary.Exceptions.BookNotFoundException;
+import com.trust.samarthanam.DigitalLibrary.Exceptions.InvalidIdException;
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
 import com.trust.samarthanam.DigitalLibrary.Model.Format;
 import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
@@ -23,30 +24,46 @@ public class BookService {
         return booksRepo.findAll();
     }
 
-    public List<Books> getBookByFormat(String key){
-        ArrayList<Books> test = new ArrayList<>();
-        ArrayList<Books> bookByFormat = new ArrayList<>();
-        test = (ArrayList<Books>) booksRepo.findAll();
-        for(Books book : test){
-            for(Format f : book.getFormat()){
-                if(f.getType().equals(key)){
-                    bookByFormat.add(book);
-                }
-            }
-        }
-        return bookByFormat;
-
+    public Collection<Books> getBookByFormat(String key){
+//        ArrayList<Books> test = new ArrayList<>();
+//        ArrayList<Books> bookByFormat = new ArrayList<>();
+//        test = (ArrayList<Books>) booksRepo.findAll();
+//        for(Books book : test){
+//            for(Format f : book.getFormat()){
+//                if(f.getType().equals(key)){
+//                    bookByFormat.add(book);
+//                }
+//            }
+//        }
+//        if(bookByFormat!=null)
+//        return bookByFormat;
+//        else
+//            throw new BookNotFoundException("");
+        Collection<Books> b = mongoTemplate.find(Query.query(new Criteria()
+                .andOperator(Criteria.where("format.type").regex(key, "i")
+                )), Books.class);
+        if(b.isEmpty())
+            throw new BookNotFoundException("");
+        else
+            return b;
     }
+
+
 //---------------------------------------get books by id----------------------------------------------------------------
     public Books getById(int id)
     {
-        Collection<Books> books = booksRepo.findAll();
-        for(Books book : books){
-            if(book.getId() == id){
-                return book;
+        if(id<=0)
+            throw new InvalidIdException("");
+
+
+            Collection<Books> books = booksRepo.findAll();
+            for (Books book : books) {
+                if (book.getId() == id) {
+                    return book;
+                }
             }
-        }
-        return null;
+
+        throw new BookNotFoundException("");
     }
 
 //-------------------------------------get books by keywords------------------------------------------------------------

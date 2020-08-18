@@ -33,7 +33,7 @@ public class BooksController {
     //----------------------------------------------------get books by format-------------------------------------------
 
     @GetMapping("/books/format/{key}")
-    public List<Books> getBookByFormat(@PathVariable String key){
+    public Collection<Books> getBookByFormat(@PathVariable String key){
         return bookService.getBookByFormat(key);
     }
 
