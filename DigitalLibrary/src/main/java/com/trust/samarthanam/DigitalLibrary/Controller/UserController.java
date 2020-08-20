@@ -88,7 +88,13 @@ public class UserController {
         return userService.getContinueReadingBooks(id);
     }
 
-    //--------------
+    //---------------------------------get all finished books of a user-------------------------------------------------
+    @GetMapping("/user/{id}/finishedbooks")
+    public ArrayList<Books> getfinishedbooks(@PathVariable String id){
+        return userService.getFinishedBooks(id);
+    }
+
+
 
 
 

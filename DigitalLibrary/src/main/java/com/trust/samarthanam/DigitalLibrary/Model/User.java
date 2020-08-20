@@ -14,6 +14,8 @@ public class User {
     private String googleId;
     @Field("saved_books")
     private List<SavedBook> savedBooks;
+    @Field("finished_books")
+    private List<SavedBook> finishedBooks;
     @Field("role")
     private String role;
 
@@ -33,6 +35,14 @@ public class User {
         this.savedBooks = savedBooks;
     }
 
+    public List<SavedBook> getFinishedBooks() {
+        return finishedBooks;
+    }
+
+    public void setFinishedBooks(List<SavedBook> finishedBooks) {
+        this.finishedBooks = finishedBooks;
+    }
+
     public String getRole() {
         return role;
     }
@@ -46,6 +56,7 @@ public class User {
         return "User{" +
                 "googleId='" + googleId + '\'' +
                 ", savedBooks=" + savedBooks +
+                ", finishedBooks=" + finishedBooks +
                 ", role='" + role + '\'' +
                 '}';
     }

@@ -169,4 +169,24 @@ public class UserService {
         return savedbooks;
     }
 
+    //------------------------------------------get all finished books of a user----------------------------------------
+    public ArrayList<Books> getFinishedBooks(String id){
+        User user = getById(id);
+        ArrayList<Books> finished = new ArrayList<>();
+        if(user!=null){
+            for(SavedBook book : user.getSavedBooks()){
+                int bookId = book.getBookId();
+                if(book.getIsFinished().equals("True")){
+                    Books save = bookService.getById(bookId);
+                    finished.add(save);
+                }
+
+            }
+            return finished;
+        }
+        throw new UserNotFoundException("Sorry user not found!");
+
+    }
+
+
 }
