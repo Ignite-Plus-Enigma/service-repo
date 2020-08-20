@@ -1,4 +1,4 @@
-package com.trust.samarthanam.DigitalLibrary;
+package com.trust.samarthanam.DigitalLibrary.ControllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
