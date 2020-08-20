@@ -33,6 +33,7 @@ public class EditService {
     }
     public Books Editbook(int id, Books newBook) {
      Books book=getById(id);
+
      String newName = newBook.getName();
 //            book.setName(newBook.getName());
 //            book.setIsbn(newBook.getIsbn());
@@ -43,7 +44,7 @@ public class EditService {
 //            book.setBookImage(newBook.getBookImage());
 //            book.setAuthor(newBook.getAuthor());
 //            book.setLanguage(newBook.getLanguage());
-        book.setName(newName);
+//            book.setName(newName);
             booksRepo.save(book);
             System.out.println(book);
             return book;
