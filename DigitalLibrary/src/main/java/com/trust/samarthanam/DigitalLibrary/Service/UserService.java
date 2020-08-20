@@ -146,6 +146,7 @@ public class UserService {
                 for (Progress p : book.getProgress()){
                     if(p.getFormat().equals(progress.getFormat())){
                         p.setLength(progress.getLength());
+                        p.setRemaining(progress.getRemaining());
                         System.out.println(p.getLength());
                     }
                 }
