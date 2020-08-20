@@ -20,7 +20,7 @@ public class CategoryController {
     //------------------------------------get all entries in Category collection----------------------------------------
     @GetMapping("/categories")
     public List<Category> getAll(){
-        return categoryService.sortingCategories();
+        return categoryService.listAll();
     }
 
     //------------------------------------get all main categories-------------------------------------------------------

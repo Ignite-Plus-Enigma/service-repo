@@ -4,6 +4,7 @@ import com.trust.samarthanam.DigitalLibrary.Exceptions.BookNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Exceptions.CategoryNotFoundException;
 import com.trust.samarthanam.DigitalLibrary.Model.Books;
 import com.trust.samarthanam.DigitalLibrary.Model.Category;
+import com.trust.samarthanam.DigitalLibrary.Model.Format;
 import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
 import com.trust.samarthanam.DigitalLibrary.dao.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,29 @@ public class CategoryService {
     }
 
     //-----------------------------------list books belonging to a subcategory of a particular format-------------------
-    public Collection<Books> listFormatBooks(String format,String subName) {
-        Collection<Books> b = mongoTemplate.find(Query.query(new Criteria()
-                .andOperator(Criteria.where("format.type").regex(format, "i"),
-                        Criteria.where("sub_category").regex(subName, "i")
-                       )), Books.class);
-        if(b.isEmpty())
-            throw new BookNotFoundException("");
-        else
-            return b;
+//    public Collection<Books> listFormatBooks(String format,String subName) {
+//        Collection<Books> b = mongoTemplate.find(Query.query(new Criteria()
+//                .andOperator(Criteria.where("format.type").regex(format, "i"),
+//                        Criteria.where("sub_category").regex(subName, "i")
+//                       )), Books.class);
+//        if(b.isEmpty())
+//            throw new BookNotFoundException("");
+//        else
+//            return b;
+//    }
+
+    public Collection<Books> listFormatBooks(String format, String subName){
+        Collection<Books> books = mongoTemplate.find(Query.query(new Criteria()
+                .andOperator( Criteria.where("sub_category").regex(subName, "i"))), Books.class);
+        Collection<Books> bookFormat = new ArrayList<>();
+        for(Books book :books){
+            for(Format f : book.getFormat()){
+                if(f.getType().equals(format) && f.getUrl()!=null){
+                    bookFormat.add(book);
+                }
+            }
+        }
+        return bookFormat;
+
     }
 }
