@@ -102,7 +102,28 @@ public class UploadControllerTests {
     @Test
     public void addNewCategoryOldsubCatTest() throws Exception
     {
-        
+
+        Category category=new Category();
+        category.setCategory("Textbooks");
+        ArrayList<String> sc = new ArrayList<>();
+        sc.add("Physics");
+        sc.add("Chemistry");
+        sc.add("Maths");
+        sc.add("Computer");
+        category.setSubCategory(sc);
+        Category category1=new Category();
+        category1.setCategory("Textbooks");
+        ArrayList<String> sc1 = new ArrayList<>();
+        sc1.add("Maths");
+        sc1.add("Computer");
+        category1.setSubCategory(sc1);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        when(uploadService.addCategory(category)).thenReturn(category);
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/oldCatAndNewsubCat/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ow.writeValueAsString(category))).andDo(print()).andExpect(status().isOk());
     }
 
 }
