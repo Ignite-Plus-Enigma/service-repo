@@ -34,14 +34,14 @@ public class EditService {
     public Books Editbook(int id, Books newBook) {
      Books book=getById(id);
             book.setName(newBook.getName());
-            book.setIsbn(newBook.getIsbn());
-            book.setFormat(newBook.getFormat());
-            book.setCategory(newBook.getCategory());
-            book.setSubCategory(newBook.getSubCategory());
-            book.setDescription(newBook.getDescription());
-            book.setBookImage(newBook.getBookImage());
-            book.setAuthor(newBook.getAuthor());
-            book.setLanguage(newBook.getLanguage());
+//            book.setIsbn(newBook.getIsbn());
+//            book.setFormat(newBook.getFormat());
+//            book.setCategory(newBook.getCategory());
+//            book.setSubCategory(newBook.getSubCategory());
+//            book.setDescription(newBook.getDescription());
+//            book.setBookImage(newBook.getBookImage());
+//            book.setAuthor(newBook.getAuthor());
+//            book.setLanguage(newBook.getLanguage());
             booksRepo.save(book);
             System.out.println(book);
             return book;
