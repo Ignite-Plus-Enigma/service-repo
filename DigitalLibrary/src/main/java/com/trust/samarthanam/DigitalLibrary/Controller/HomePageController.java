@@ -38,4 +38,9 @@ public class HomePageController {
     public List<Books> getMostViewedBooks(){
         return homeService.getMostViewedBooks();
     }
+
+    @GetMapping("/books/youmayalsolike/{key}")
+    public Collection<Books> getYouMayAlsoLike(@PathVariable  String key){
+        return homeService.youmayalsolike(key);
+    }
 }
