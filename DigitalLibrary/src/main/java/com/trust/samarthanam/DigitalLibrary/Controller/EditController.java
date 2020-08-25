@@ -24,7 +24,7 @@ public class EditController {
 //    public Collection<Books> findBook(@PathVariable String key) {
 //        return bookService.searchBooks(key);
 //    }
-
+//------------------------------------To edit an existing book--------------------------------------------------------------------------
     @PutMapping("/editbook/{id}")
     public Books editBook(@PathVariable int id,@RequestBody Books book){
       Books b= editService.Editbook(id,book);
