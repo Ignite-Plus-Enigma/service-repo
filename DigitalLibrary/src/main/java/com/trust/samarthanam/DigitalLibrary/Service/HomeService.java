@@ -59,4 +59,14 @@ public class HomeService {
         return mongoTemplate.find(query, Books.class);
     }
 
+    //-----------------------you may also like--------------------------------------------------------------------------
+    public Collection<Books> youmayalsolike(String key){
+        Collection<Books> b = mongoTemplate.find(Query.query(new Criteria()
+                .orOperator(Criteria.where("subCategory").regex(key, "i"))).limit(7), Books.class);
+        if(b.isEmpty())
+            throw new BookNotFoundException("");
+        else
+            return b;
+    }
+
 }

@@ -22,7 +22,23 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.trust.samarthanam.DigitalLibrary"))
                 .paths(regex("/api/v1.*"))
-                .build();
-//                .apiInfo(metaInfo());
+                .build()
+                .apiInfo(metaInfo());
     }
+    private ApiInfo metaInfo() {
+
+        ApiInfo apiInfo = new ApiInfo(
+                "Digital Library Swagger API",
+                "Digital Library Swagger API for Samarthanam NGO ",
+                "1.0",
+                "Terms of Service",
+                new Contact("Team Enigma", "https://www.samarthanam.org/",
+                        "teamenigma296@gmail.com"),
+                "Apache License Version 2.0",
+                "https://www.apache.org/licesen.html"
+        );
+
+        return apiInfo;
+    }
+
 }
