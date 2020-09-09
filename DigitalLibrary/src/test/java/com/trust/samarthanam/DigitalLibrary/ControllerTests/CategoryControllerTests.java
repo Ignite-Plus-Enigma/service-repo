@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +128,7 @@ public class CategoryControllerTests {
         book.add(books);
 
         when(categoryService.listFormatBooks("Audio","Physics")).thenReturn(book);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/books/format/Audio/subcategory/Physics")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/books/format/Audio/subcategory/Physics")).andDo(print()).andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(jsonPath("$.author").value("Astronomy"));
 
 
     }

@@ -100,7 +100,7 @@ public class UploadControllerTests {
                 .content(ow.writeValueAsString(category))).andDo(print()).andExpect(status().isOk());
     }
     @Test
-    public void addNewCategoryOldsubCatTest() throws Exception
+    public void  updateOldCategoryTest() throws Exception
     {
 
         Category category=new Category();
@@ -120,7 +120,7 @@ public class UploadControllerTests {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        when(uploadService.addCategory(category)).thenReturn(category);
+        when(uploadService.addNewSubcategoryToOldCategory(category)).thenReturn(category);
         this.mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/oldCatAndNewsubCat/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(ow.writeValueAsString(category))).andDo(print()).andExpect(status().isOk());

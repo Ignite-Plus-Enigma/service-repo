@@ -1,5 +1,6 @@
 package com.trust.samarthanam.DigitalLibrary.Model;
 
+import com.mongodb.lang.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -9,7 +10,9 @@ import java.util.List;
 @Document(collection = "Category")
 public class Category {
     @Id
+    @NonNull
     @Field("_id")
+
     private String category;
     @Field ("sub_category")
     private List<String> subCategory;

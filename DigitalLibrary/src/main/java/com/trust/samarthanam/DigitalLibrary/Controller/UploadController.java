@@ -15,22 +15,21 @@ public class UploadController {
 
     @Autowired
     UploadService uploadService;
-    //---------------------------------------To uplod a new book---------------------------------------------------------------------------
+    //---------------------------------------To upload a new book---------------------------------------------------------------------------
     @PostMapping("/book/add")
     public Books addNewBook(@RequestBody Books newBook){
-
         return uploadService.addBook(newBook);
     }
-    //--------------------------To add new category and new subcategories under it-----------------------------------------
+    //--------------------------To add new category and new subcategories under it-----------------------------------------------------------
     @PostMapping("/newCatAndSubcat/add")
-    public Category addNewCategory(@RequestBody Category newCat){
-        return uploadService.addCategory(newCat);
+    public Category addNewCategory(@RequestBody Category newCategory){
+        return uploadService.addCategory(newCategory);
     }
 
-    //----------------------To update a existing category with new subcategories---------------------------------------------------------
+    //----------------------To update a existing category with new subcategories-----------------------------------------------------------
     @PutMapping("/oldCatAndNewsubCat/add")
-    public Category addNewCategoryOldsubCat(@RequestBody Category newCat) {
-        return uploadService.addoldCatAndnewSubCat(newCat);
+    public Category updateOldCategory(@RequestBody Category newCategory) {
+        return uploadService.addNewSubcategoryToOldCategory(newCategory);
     }
 
 

@@ -9,11 +9,12 @@ import com.trust.samarthanam.DigitalLibrary.dao.BooksRepo;
 import com.trust.samarthanam.DigitalLibrary.dao.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class UploadService {
     @Autowired
     NextSequenceService nextSequenceService;
@@ -30,43 +31,23 @@ public class UploadService {
 
     }
 
-    public Category addCategory(Category newCat) {
-        categoryRepo.save(newCat);
-        return newCat;
+    public Category addCategory(Category newCategory) {
+        categoryRepo.save(newCategory);
+        return newCategory;
 
     }
 
-    public Category addoldCatAndnewSubCat(Category newCat) {
-//        String category = newCat.getCategory();
-//        List<String> subCategory = newCat.getSubCategory();
-//        List<String> subCat = new ArrayList<>();
-//        List<Category> l = categoryRepo.findAll();
-//        Category category1 = new Category();
-//        for (Category cat : l) {
-//            if (cat.getCategory().equals(category))
-//                subCat = cat.getSubCategory();
-//        }
-//        for (String s : subCat) {
-//            subCategory.add(s);
-//        }
-//        for (Category c : l) {
-//            if (c.getCategory().equals(category)) {
-//                c.setSubCategory(subCategory);
-//                 categoryRepo.save(c);
-//            }
-//        }
-//        return null;
-        String category = newCat.getCategory();
-        List<String> subcategory = newCat.getSubCategory();
-        Category cat = categoryRepo.findById(category).get();
-        List<String> subCat = cat.getSubCategory();
-        for (String s: subCat) {
-            subcategory.add(s);
+    public Category addNewSubcategoryToOldCategory(Category newCategory) {
+        String category = newCategory.getCategory();
+        List<String> newSubcategory = newCategory.getSubCategory();
+        Category oldCategory = categoryRepo.findById(category).get();
+        List<String> subCategory = oldCategory.getSubCategory();
+        for (String s: subCategory) {
+            newSubcategory.add(s);
         }
-        cat.setSubCategory(subcategory);
-        System.out.println(cat);
-        categoryRepo.save(cat);
-        return cat;
+        oldCategory.setSubCategory( newSubcategory);;
+        categoryRepo.save(oldCategory);
+        return oldCategory;
 
 
     }

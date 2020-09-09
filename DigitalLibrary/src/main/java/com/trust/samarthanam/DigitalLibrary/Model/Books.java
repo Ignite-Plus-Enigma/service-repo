@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Books {
     @Transient
-    public  static final String SEQUENCE_NAME="books_sequence";
+    public static final String SEQUENCE_NAME="books_sequence";
     @Id
     @Field("_id")
     private int id;
